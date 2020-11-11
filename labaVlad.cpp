@@ -2,8 +2,6 @@
 #include <locale.h>
 #include <stdlib.h>
 #include <stdio.h>
-#define M 5
-#define N 5
 
 int main()
 {
