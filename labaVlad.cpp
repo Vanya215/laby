@@ -1,4 +1,3 @@
-﻿
 #include <conio.h>
 #include <locale.h>
 #include <stdlib.h>
@@ -9,24 +8,32 @@
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    int mat[M][N];
+    int **mat = nullptr;
     int i, j, n, m;
-    printf("Введите кол-во столбцов в матрице: ");
-    scanf_s("%d", &m);
-    while (m > 5 || m <= 0)
-    {
-        printf("Недопустимый размер, кол-во столбцов не должно превышать 5 \n");
-        printf("Введите размер повторно: ");
-        scanf_s("%d", &m);
-    }
-    printf("Введите кол-во строк в матрице: ");
-    scanf_s("%d", &n);
-    while (n > 5 || n <= 0)
-    {
-        printf("Недопустимый размер, кол-во строк не должно превышать 5 \n");
-        printf("Введите размер повторно: ");
+    do {
+        system("cls");
+        printf("Введите количество столбцов n: ");
         scanf_s("%d", &n);
-    }
+        printf("Введите количество строк m: ");
+        scanf_s("%d", &m);
+        if (n < 1 || m < 1) {
+            fflush(stdin);
+            continue;
+        }
+        if (!(mat = (int**)malloc(sizeof(int*) * n)))
+            printf("\nНедостаточно свободной памяти\nУменьшите размер матрицы");
+        for (int i = 0; i < n; i++) {
+            if (!(*(mat + i) = (int*)malloc(sizeof(int) * m))) {
+                printf("\nНедостаточно свободной памяти\nУменьшите размер матрицы");
+                for (int j = 0; j < n; j++)
+                    free(*(mat + j));
+
+                free(mat);
+                mat = nullptr;
+                break;
+            }
+        }
+    } while (!mat);
     printf("Заполните матрицу: \n");
     for (i = 0; i < m; i++)
     {
